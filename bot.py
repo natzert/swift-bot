@@ -22,9 +22,8 @@ for c in channels:
 
 irc.send ( 'PRIVMSG NickServ :IDENTIFY ' + password + '\r\n' )
 
-msgcnt = 0
-
 while True:
+   time.sleep(7200)
    data = irc.recv ( 4096 )
    
    response = random.choice(responses)
@@ -34,9 +33,7 @@ while True:
    if data.find ( 'PING' ) != -1:
       irc.send ( 'PONG ' + data.split() [ 1 ] + '\r\n' )
 
-   if msgcnt > 25:
-      irc.send ( 'PRIVMSG ' + randchan + ' :' + response + '\r\n' )
-      msgcnt = 0
+   irc.send ( 'PRIVMSG ' + randchan + ' :' + response + '\r\n' )
 
    if data.find ( 'oggcastplanet' ) != -1:
       if data.find ( nick ) != -1:
